@@ -23,6 +23,8 @@ class sarikatmatiController extends Controller
         ->join('users','sarikatmatis.user_id','users.id')
         ->select('sarikatmatis.*','users.name','users.lname')
         ->get();
+
+        
             return view('admin.sarikatmati.index', compact('sarikatmati'));
         
     }
@@ -35,10 +37,11 @@ class sarikatmatiController extends Controller
     public function create()
     {
         //
-        $user = DB::table('sarikatmatis')
-        ->join('users','sarikatmatis.user_id','users.id')
-        ->select('sarikatmatis.*','users.name','users.lname')
-        ->get();
+        $user=user::all()->where('is_admin', '=', 0);
+        // $user = DB::table('sarikatmatis')
+        // ->join('users','sarikatmatis.user_id','users.id')
+        // ->select('sarikatmatis.*','users.name','users.lname')
+        // ->get();
             
             return view('admin.sarikatmati.create',compact('user'));
     }
@@ -52,12 +55,13 @@ class sarikatmatiController extends Controller
     public function store(Request $request)
     {
         //
-        
+        // dd($request);
         $user = $request->id;
+        // dd($user);
         $request->validate([
             'applydate' => 'required',
-            'name' => 'required',
-            'lname' => 'required',
+            'namef' => 'required',
+            'lnamef' => 'required',
             'sex' => 'required',
             'birthday' => 'required',
         ]);
@@ -65,23 +69,25 @@ class sarikatmatiController extends Controller
         foreach( $q as $row){
                     $id = $row->sarakatmati_id;
                 }
-                
+        $t=0;
          $id= $id + 1 ;
         //  dd($id);
         $S = new sarikatmati;
         $S->sarakatmati_id = $id;
         $S->user_id = $user;
+        $S->type = $t;
         $S->applydate = $request->applydate;
         $S->save();
         // dd($S);
-        
+
+        //สมาชิกครอบครัว
         $sarikatmati_id = $id;
-        $n = count($request->name);
+        $n = count($request->namef);
         for($i=0;$i<$n;$i++){
             $f = new familys;
             $f->sarikatmati_id = $sarikatmati_id;
-            $f->name = $request->namef[$i];
-            $f->lname = $request->lnamef[$i];
+            $f->namef = $request->namef[$i];
+            $f->lnamef = $request->lnamef[$i];
             $f->sex = $request->sex[$i];
             $f->birthday = $request->birthday[$i];
             $f->save();
@@ -97,9 +103,13 @@ class sarikatmatiController extends Controller
      * @param  \App\Models\sarikatmati  $sarikatmati
      * @return \Illuminate\Http\Response
      */
+
+
+    
     public function show($id)
     {
         //
+        
         $id=$id;
         //  dd($id);
         //
@@ -120,9 +130,17 @@ class sarikatmatiController extends Controller
      * @param  \App\Models\sarikatmati  $sarikatmati
      * @return \Illuminate\Http\Response
      */
-    public function edit(sarikatmati $sarikatmati)
+    public function edit($id)
     {
         //
+        $fm = familys::where('sarikatmati_id',$id)->get();
+        $sk = DB::table('sarikatmatis')
+            ->join('users','sarikatmatis.user_id','users.id')
+            ->select('sarikatmatis.*','users.name','users.lname')
+            ->where('sarakatmati_id',$id)//กำหนดให้แสดงแค่เฉพาะของไอดีนั้น
+            ->get();
+        // dd($fund_t);
+            return view('admin.sarikatmati.edit', compact('fm','sk'));
     }
 
     /**
@@ -132,19 +150,63 @@ class sarikatmatiController extends Controller
      * @param  \App\Models\sarikatmati  $sarikatmati
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, sarikatmati $sarikatmati)
+    public function update(Request $request, $id)
     {
-        //
-    }
+        //บันทึกค่าใหม่
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\sarikatmati  $sarikatmati
-     * @return \Illuminate\Http\Response
-     */
+        // dd($request);
+        $n = count($request->namefn);
+        for($i=0;$i<$n;$i++){
+            $ne = new familys;
+            $ne->sarikatmati_id = $id;
+            $ne->namef = $request->namefn[$i];
+            $ne->lnamef = $request->lnamefn[$i];
+            $ne->sex = $request->sexn[$i];
+            $ne->birthday = $request->birthdayn[$i];
+            $ne->save();
+        }
+
+        //อัพเดตได้แค่ค่าเดียว ค่าที่ 1
+        // $d = count($request->namef);
+        // for($i=0;$i<$n;$i++){
+        //     familys::where('sarikatmati_id',$id)->update([
+        //         'sarikatmati_id' => $id,
+        //         'namef' => $request->namef[$i],
+        //         'lnamef' => $request->lnamef[$i],
+        //         'sex' => $request->sex[$i],
+        //         'birthday' => $request->birthday[$i],
+        //     ]);
+        // }
+
+        return redirect()->route('sarikatmati.index')
+            ->with('success' , 'อัพเดตข้อมูลซารีกัตมาตีสำเร็จ.');
+    }
+        
+
+   
     public function destroy(sarikatmati $sarikatmati)
     {
         //
+
+    }
+
+    public function showuser()
+    {
+        //
+        $id=Auth::user()->id;
+        $id=$id;
+        
+        // dd($id);
+        $sarikatmati = DB::table('sarikatmatis')
+        ->join('users','sarikatmatis.user_id','users.id')
+        ->join('family','sarikatmatis.sarakatmati_id','family.sarikatmati_id')
+        ->select('sarikatmatis.*','family.*','users.name','users.lname')
+        ->where('sarikatmatis.user_id',$id)
+        ->get();
+
+
+        // dd($sarikatmati);
+            return view('member.sarikatmati', compact('sarikatmati'));
+        
     }
 }

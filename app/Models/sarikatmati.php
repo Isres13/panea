@@ -14,5 +14,6 @@ class sarikatmati extends Model
         'sarakatmati_id',
         'user_id',
         'applydate',
+        'type',
     ];
 }

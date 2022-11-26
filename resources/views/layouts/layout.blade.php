@@ -228,7 +228,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{ route('admin.home') }}">
                         <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
                         <span class="title">dashboard</span>
                     </a>
@@ -258,18 +258,17 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('recoverF') }}">
+                    <a href="{{ route('loan.index') }}">
                         <span class="icon"><ion-icon name="card-outline"></ion-icon></span>
                         <span class="title">กองทุน</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.home') }}">
+                    <a href="{{ route('account') }}">
                         <span class="icon"><ion-icon name="cash-outline"></ion-icon></span>
-                        <span class="title">บัญชี</span>
+                        <span class="title">บัญชีกองทุน</span>
                     </a>
                 </li>
-        
             </ul>
         </div>
 

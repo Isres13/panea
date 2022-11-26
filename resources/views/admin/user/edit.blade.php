@@ -85,7 +85,7 @@
                                 <div class="col">
                                         <label for="formGroupExampleInput"  class="form-lable fw-bold">รหัสผ่าน</label>
                                         <input type="password" class="form-control" name="password" placeholder="********" value="{{ $user->password}}">
-                                            <ion-icon name="eye-off-outline"></ion-icon>
+                                            <!-- <ion-icon name="eye-off-outline"></ion-icon> -->
                                         
                                 </div>
                                 
@@ -100,7 +100,7 @@
     
 
     
-    <script>
+    <!-- <script>
         const pass_field = doucument.querySelector("pw");
         const show_btn = doucument.querySelector("i");
         show_btn.addEventListener("click", function){
@@ -109,7 +109,7 @@
             }
         }
 
-    </script>
+    </script> -->
     
 @endsection
 

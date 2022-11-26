@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\depositwithdraw;
 use App\Models\user;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -111,11 +113,11 @@ class UserController extends Controller
         
         $users->save();
             return redirect()->route('user.index')
-                ->with('success', 'อัพเดคข้อมูล ผู้ใช้สำเร็จ.');
+                ->with('success', 'อัพเดดข้อมูล ผู้ใช้สำเร็จ.');
     }
 
 
-    public function show( $id ) {
+    public function show($id) {
 
         $user = User::find($id);
         //dd($id);
@@ -132,6 +134,56 @@ class UserController extends Controller
                 ->with('D', 'ลบข้อมูล ผู้ใช้สำเร็จ.');
     }
 
+    //แสดงช้อมูลผู้ใช้
+    
+    public function showuser() {
 
+        $id=Auth::user()->id;
+       
+        $user = User::find($id);
+        // dd($user);
+        //echo $id->account_id ;
+            return view('member.showuser', compact('user'));
 
+    }
+
+    public function edituser(User $user) {
+
+        $id=Auth::user()->id;
+        $user = User::find($id);
+        return view('member.edituser', compact('user'));
+
+    }
+
+    public function updateuser(Request $request, $id) {
+
+        
+        $request->validate([
+            'name' => 'required',
+            'lname' => 'required',
+            'name' => 'required',
+            'sex' => 'required',
+            'status' => 'required',
+            'tel' => 'required',
+            'birthday' => 'required',
+            'address' => 'required',
+            'email' => 'required',
+        ]);
+        
+        $users = User::find($id);
+        $users->name = $request->name;
+        $users->lname = $request->lname;
+        $users->Nname = $request->Nname;
+        $users->sex = $request->sex;
+        $users->status = $request->status;
+        $users->tel = $request->tel;
+        $users->birthday = $request->birthday;
+        $users->address = $request->address;
+        $users->email = $request->email;
+        $users->password = bcrypt('$request->password');
+            // dd($users);        
+        $users->save();
+            return redirect()->route('showuser')
+                ->with('success', 'อัพเดดข้อมูล สำเร็จ.');
+    }
 }

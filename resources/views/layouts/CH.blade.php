@@ -34,7 +34,7 @@
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: ;
+  background-color: #7d2c2c ;
   overflow-x: hidden;
   padding-top: 20px;
   

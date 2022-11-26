@@ -14,10 +14,11 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h2>เพิ่มข้อมูลซารีกัตมาตี</h2>
+                <a href="{{route('sarikatmati.index')}}" class="btn btn-primary my-3 float-start ">ย้อนกลับ</a>
             </div>
            
            
-            <form action="{{ route('sarikatmati.store') }}" method="post" class=" p-5">
+            <form action="{{ route('sarikatmati.store') }}" method="post" class="mt-2">
                 @csrf
                 <div class="row">
                     <div class="col-md-12">  
@@ -34,7 +35,7 @@
                             <strong>หัวหน้าครอบครัว</strong>
                             <select class="custom-select my-1 mr-sm-2" aria-label="Default select example" name="id" placeholder="Enter subject"><option >
                                 @foreach($user as $row) 
-                                <option  value="{{$row->user_id}}">{{$row->name}} {{$row->lname}}@endforeach </option>
+                                <option  value="{{$row->id}}">{{$row->name}} {{$row->lname}}@endforeach </option>
                             </select><br>
                             <strong>วันที่สมัคร</strong>
                             <input type="date" name="applydate" placeholder="ชื่อ" class="form-control">
@@ -43,9 +44,7 @@
                             @enderror
                         </div>
                     </div>
-                   
-                    
-                    
+                
                     <hr  style="height: 100 px">
                     <div class="col-md-12 mt-3 ml-1 text-center">
                        
@@ -76,8 +75,6 @@
                             <button type="submit" class="mt-3 btn btn-success">Submit</button>
                         </div>
                     </div>
-
-                  
                 </div>
             </form>
         </div>

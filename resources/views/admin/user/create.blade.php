@@ -131,7 +131,7 @@
     
 
     
-    <script>
+    <!-- <script>
         const pass_field = doucument.querySelector("pw");
         const show_btn = doucument.querySelector("i");
         show_btn.addEventListener("click", function){
@@ -140,6 +140,6 @@
             }
         }
 
-    </script>
+    </script> -->
 
 @endsection

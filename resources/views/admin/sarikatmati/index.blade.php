@@ -21,9 +21,9 @@
                 <div class="d-flex justify-content   bd-highlight bg-gray-100 ">
 <!--กลุ่มปุ่ม ButtonGroup-->
                     <div class="btn-group" role="group" aria-label="Basic outlined example">
-                    <a href="#" class="btn btn-outline-secondary text-dark">สมัครซารีกัตมาตี</a>
-                    <a href="{{ route('DWsrikat') }}"  class="btn btn-outline-secondary text-dark">จ่ายเงิน</a>
-                    <a href="{{ route('Wsrikatmati') }}"  class="btn btn-outline-secondary text-dark">เบิกเงิน</a>
+                    <a href="#" class="btn btn-outline text-light active" style="Background: #3C8085; ">สมัครซารีกัตมาตี</a>
+                    <a href="{{ route('DWsarikatmati') }}"  class="btn btn-outline text-dark" style="color: #3C8085;">จ่ายเงิน</a>
+                    <a href="{{ route('Wsrikatmati') }}"  class="btn btn-outline text-dark" style="color: #3C8085;">เบิกเงิน</a>
                 </div>
                 </div>
 
@@ -34,7 +34,9 @@
             <div class="  mx-auto">
                 <div class=""row mt-4>
                     <h3 class="text-center mt-3">ข้อมูลซารีกัตมาตี</h3>
-                    <a href="{{route('sarikatmati.create')}}" class="btn btn-success my-3 float-end">เพิ่มข้อมูลซารีกัตมาตี</a>
+                        <a  href="{{ route('updatetype') }}" class="btn btn-danger my-3 float-end " style=" margin-left: 15px;" 
+                        onclick="return confirm('คุณต้องการรีเซ็ตการจ่ายเงินซารีกัตมาตีหรือไหม')">reset</a>
+                    <a href="{{route('sarikatmati.create')}}" class="btn btn-success my-3 float-end">สมัครซารีกัตมาตี</a>
                 </div>
             </div>
         </div>
@@ -46,15 +48,16 @@
          @endif
     <table class="table">
         <thead class="table-light">
-            <tr class="TRCENTER">
+            <tr class="">
                 <th scope="col"  width="150px">ลำดับ</th>
                 <th scope="col">รหัสซารีกัตมาตี</th>
                 <th scope="col">ชื่อ - สกุล</th>
                 <th scope="col">วันที่สมัคร</th>
+                <th scope="col">จำนวนปีที่สมัคร</th>
                 <th scope="col"></th>
             </tr>
         </thead>
-        <tbody>
+        <tbody >
             @php($i=1)
                 @foreach( $sarikatmati as $row )
                 <tr>
@@ -62,11 +65,22 @@
                     <td>{{$row->sarakatmati_id}}</td>
                     <td>{{$row->name}} {{$row->lname}}</td>
                     <td>{{$row->applydate}}</td>
+                    <td>{{$row->applydate}}</td>
                     <td>
                         <a href="{{route('viewS', $row->sarakatmati_id)}}" class="btn btn-info">view</a>
+                        <a href="{{route('editS', $row->sarakatmati_id)}}" class="btn btn-info">แก้ไข</a>
+                        @if($row->type == 0) 
+                        <p  class="btn btn-danger " style="margin-right: -90; margin-bottom: 0px;">ยังไม่ชำระ</p>
+                        @endif
+                        @if($row->type == 1) 
+                        <p  class="btn btn-Success " style="margin-right: -90; margin-bottom: 0px;">ชำระแล้ว</p>
+                        @endif
+                        
                     </td>
                 </tr>
+               
                 @endforeach
+                
         </tbody>
     </table>
                     </div>

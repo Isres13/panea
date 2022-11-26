@@ -21,7 +21,8 @@
 </style>
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
+    
+    <div class="row justify-content-center " style="margin-top: 60px;">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header-H">{{ __('Login') }}</div>
@@ -66,16 +67,8 @@
                                     <label class="form-check-label" for="remember">
                                         {{ __('Remember Me') }}
                                     </label>
+                                    
                                 </div>
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
@@ -83,10 +76,19 @@
                                 @endif
                             </div>
                         </div>
+
+                        <div class="row mb-0">
+                            <div class="col-md-8 offset-md-4">
+                                <button type="submit" class="btn btn-primary" style="margin-left: 150px;">
+                                    {{ __('Login') }}
+                                </button>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    
 </div>
 @endsection

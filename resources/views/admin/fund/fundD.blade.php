@@ -22,10 +22,9 @@
                 <div class="d-flex justify-content   bd-highlight bg-gray-100 ">
 <!--กลุ่มปุ่ม ButtonGroup-->
                     <div class="btn-group" role="group" aria-label="Basic outlined example">
-                    <a href="{{ route('recoverF') }}"  class="btn btn-outline-secondary text-dark">ขอกู้กองทุน</a>
-                    <a href="{{ route('contractF') }}"  class="btn btn-outline-secondary text-dark">สัญญากู้</a>
+                    <a href="{{ route('loan.index') }}"  class="btn btn-outline-secondary text-dark">ขอกู้กองทุน</a>
                     <a href="#"  class="btn btn-outline-secondary text-dark">คืนเงิน</a>
-                    <a href="{{ route('typeF') }}"  class="btn btn-outline-secondary text-dark">ประเภทกองทุน</a>
+                    <a href="{{ route('fundtype.index') }}"  class="btn btn-outline-secondary text-dark">ประเภทกองทุน</a>
                 </div>
                 </div>
         <div class="card  mt-3"  style="max-width: 60rem; left: 150px; ">

@@ -22,109 +22,119 @@
                 <div class="d-flex justify-content   bd-highlight bg-gray-100 ">
 <!--กลุ่มปุ่ม ButtonGroup-->
                     <div class="btn-group" role="group" aria-label="Basic outlined example">
-                    <a href="{{ route('sarikatmati.index') }}"  class="btn btn-outline-secondary text-dark">สมัครซารีกัตมาตี</a>
-                    <a href="{{ route('DWsrikat') }}"  class="btn btn-outline-secondary text-dark">จ่ายเงิน</a>
-                    <a href="#"  class="btn btn-outline-secondary text-dark">ถอนเงิน</a>
+                    <a href="{{ route('sarikatmati.index') }}"  class="btn btn-outline text-dark" style="color: #3C8085; ">สมัครซารีกัตมาตี</a>
+                    <a href="{{ route('DWsarikatmati') }}"  class="btn btn-outline- text-dark" style="color: #3C8085; ">จ่ายเงิน</a>
+                    <a href="#"  class="btn btn-outline text-light active" style="Background: #3C8085; ">เบิกเงิน</a>
                 </div>
                 </div>
-        <div class="card  mt-3"  style="max-width: 60rem; left: 150px; ">
-        <div class=" row ">
-            <div class=" col-lg-10 mx-auto">
-                <div class="row mt-5">
-                    <div class="col-md-12 ">
-                        <h3 class="text-center">ถอนซารีกัตมาตี</h3>
-                    </div>
-                </div>
-    
-                    <form action="#" method="POST">
-                        @csrf
-                            <div class="mx-aotu " >
-                                <div class="row ">
-                                    <div class="col ">
-                                        <label for="formGroupExampleInput" class="form-label fw-bold">รหัสสมาชิก</label>
-                                        <input type="number" name="" class="form-control" placeholder="รหัสสมาชิก" maxlength>
-                                    </div>
-                                    <div class="col ">
-                                        <label for="inputState" name="status"class="form-label fw-bold">ฝาก - ถอน</label>
-                                            <select id="inputState" class="form-select">
-                                            <option selected></option>
-                                            <option >ฝาก</option>
-                                            <option >ถอน</option>
-                                            </select>
-                                    </div>
-                                </div>
-                                <div class="row ">
-                                    <div class="col ">
-                                        <label for="formGroupExampleInput" class="form-label fw-bold">จำนวน</label>
-                                        <input type="number" name="" class="form-control" placeholder="จำนวน" maxlength>
-                                    </div>
-                                    <div class="col-md-4 ">
-                                        <label for="birthday" class="form-label fw-bold ">วัน / เดือน / ปีเกิด</label> <br>
-                                        <input type="date" id="birthday" name="" >
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <center><button type="Submit" class="btn btn-primary my-5 text-center">เพิ่มข้อมูล</button></center>
-                                </div>
-                            </div>
 
-                    </form>
-                </div>
-            </div>
-        </div>
+
                 <div>
                     <div class="alert alert-Light border rounded-1 p-1  mt-3" role="alert">
-                                    <div class="continea">
-                        <div class="row ">
-                            <div class="  mx-auto">
-                                <div class=""row mt-4>
-                                    <h3 class="text-center mt-3">ข้อมูลถอนซารีกัตมาตี</h3>
-                                    <a href="{{ route('employee.create') }}" class="btn btn-success my-3 float-end">Creat new member</a>
+                        <div class="continea">
+                            <div class="row ">
+                                <div class="mx-auto">
+                                    <div class=""row mt-4>
+                                        <h3 class="text-center mt-3">ข้อมูลเบิกซารีกัตมาตี</h3>
+                                        <div class="d-grid gap-2 d-md-flex justify-content-md-end my-3 ">
+                                            <button type="button" class="btn btn-success btn" data-bs-toggle="modal" data-bs-target="#deposit">
+                                                เบิกซารีกัตมาตี
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                        @if ($message = Session::get('success'))
-                            <div class="alert alert-success">
-                                <p>{{ $message }}</p>
-                            </div>
-                        @endif
-                    <table class="table">
-                        <thead class="table-light">
-                            <tr class="TRCENTER">
-                                <th scope="col"  width="30px">ลำดับ</th>
-                                <th scope="col">รหัสคณะกรรมการ</th>
-                                <th scope="col">ชื่อ - สกุล</th>
-                                <th scope="col">ตำแหน่ง</th>
-                                <th scope="col">รูป</th> 
-                                <th width="300px"></th>
-                            </tr>
-                        </thead>
-                            
-                        <tbody>
-                            
-                                
-                                <tr>
-                                <th scope="row"></th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <form class="EDS"action="#" method="POST">
-                                        <a href="#" class="btn btn-info">show</a>
-                                        <a href="#" class="btn btn-primary">edit</a>
-                                        @csrf <!--Cross-site request forgery เป็นตัวป้องกันฟอร์ม-->
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">delete</button>
-                                    </form>
-                                </td>
+                            @if ($message = Session::get('success'))
+                                <div class="alert alert-success">
+                                    <p>{{ $message }}</p>
+                                </div>
+                            @endif
+
+                        <table class="table mt-3">
+                            <thead class="table-light">
+                                <tr class="TRCENTER">
+                                    <th scope="col"  width="30px">ลำดับ</th>
+                                    <th scope="col">รหัสซารีกัตมาตี</th>
+                                    <th scope="col">รหัสคณะกรรมการ</th>
+                                    <th scope="col">จำนวนเงิน</th>
+                                    <th scope="col">วัน/เดือน/ปีที่จ่าย</th> 
                                 </tr>
-                        </tbody>
-                    </table>
+                            </thead>
+                                
+                            <tbody>
+                               
+                                    <tr>
+                                        <th scope="row"></th>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
         </div>
     </div>
-</div>  
+</div>
+
+<!-- จ่ายเงินซารีกัตมาตี modal  -->
+<div class="modal" id="deposit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title " id="staticBackdropLabel">จ่ายซารีกัตมาตี</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            @if ($errors -> any())
+                    <div class="alert alert-danger">
+                        <strong>Whoops!</strong>
+                            The were some problemr with you input. <br><br>
+                        <ul>
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div> 
+            @endif
+            <form  class="mt-3" action="#" method="post">
+                        @csrf
+                            <div class="mx-aotu">
+                                <div class="row ">
+                                    <div class="col ">
+                                        <label for="formGroupExampleInput" class="form-label fw-bold">รหัสซารีกัตมาตี</label>
+                                        <input type="number" id="sarikatmati_id" name="sarikatmati_id" class="form-control" placeholder="รหัสซารีกัตมาตี">
+                                    </div>
+                                    <div class="col ">
+                                        <label for="formGroupExampleInput" class="form-label fw-bold">รหัสคณะกรรมการ</label>
+                                        <input type="text" id="employee_id" name="employee_id" class="form-control dropdown-toggle" placeholder="รหัสคณะกรรมการ" >
+                                        
+                                        <option  > </option>
+                                        </input>
+                                       
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col ">
+                                        <label for="formGroupExampleInput" class="form-label fw-bold">จำนวนเงิน</label>
+                                        <input type="number"  id="amount" name="amount" class="form-control" placeholder="จำนวน" >
+                                    </div>
+
+                                    <div class="col">
+                                        <label for="formGroupExampleInput" class="form-label fw-bold">วัน/เดือน/ปีที่จ่าย</label>
+                                        <input type="date" id="paymentdate" name="paymentdate"  class="form-control"  >
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">บันทึก</button>
+                            </div>
+            </form>
+            </div>
+        </div>
+        </div>
+    </div>  
 @endsection

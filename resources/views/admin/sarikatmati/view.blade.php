@@ -14,19 +14,19 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h2>ข้อมูลซารีกัตมาตี</h2>
+                <a href="{{route('sarikatmati.index')}}" class="btn btn-primary my-3 float-start ">ย้อนกลับ</a>
             </div>
            
            
-            <form action="#" class=" p-5">
+            <form action="#" class="mt-2">
                 @csrf
                 <div class="row">
                     <div class="col-md-12">  
                          @if ($message = Session::get('Error'))
-                        <div class="alert alert-success mt-2">
-                         <p>{{ $message }}</p>
-                        </div>
+                            <div class="alert alert-success mt-2">
+                                <p>{{ $message }}</p>
+                            </div>
                         @endif
-                    
                     </div>
                     <div class="col-md-3">
                         <div class="form-group my-3">
