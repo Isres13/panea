@@ -26,7 +26,7 @@
 
     <style>
 
-/* แต่ง Sidebar  ชาคร หวังโซะ*/ 
+/* แต่ง Sidebar */ 
 
 .sidenav {
   height: 100%;
